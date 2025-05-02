@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F7F7F7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <!-- Título -->
+
+        <Button
+            android:id="@+id/loginButton2"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="4dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="Registar conta"
+            android:textColor="#0000FF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Criar Conta"
+            android:textSize="26sp"
+            android:textColor="#0000FF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Campo de Email -->
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/custom_edittext"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Campo de Senha -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/custom_edittext"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/passwordInput"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/togglePasswordVisibility"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:contentDescription="Alternar visibilidade da senha"
+                android:src="@drawable/ic_eye" />
+
+        </LinearLayout>
+
+        <!-- Campo Confirmar Senha -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/custom_edittext"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="24dp">
+
+            <EditText
+                android:id="@+id/confirmPasswordInput"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/confirmar_senha"
+                android:inputType="textPassword"
+                android:background="@null" />
+
+            <ImageButton
+                android:id="@+id/togglePasswordVisibility2"
+                android:layout_width="48dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:contentDescription="Alternar visibilidade da senha"
+                android:src="@drawable/ic_eye" />
+
+
+        </LinearLayout>
+
+        <!-- Botão de Submissão -->
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Criar Conta"
+            android:backgroundTint="#0000FF"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"
+            android:elevation="4dp"/>
+
+    </LinearLayout>
+</ScrollView>
+

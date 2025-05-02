@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "381135933065",
+    "project_id": "smart-city-projecto-fim-curso",
+    "storage_bucket": "smart-city-projecto-fim-curso.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381135933065:android:64ce9a49673313b8588058",
+        "android_client_info": {
+          "package_name": "com.example.projeto2_smart_city_final"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr80OCgGiEb3HUY_sXJ0odUHxNY_aF2FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381135933065:android:6b4b4b433dabcf82588058",
+        "android_client_info": {
+          "package_name": "com.example.smart_app_project2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr80OCgGiEb3HUY_sXJ0odUHxNY_aF2FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

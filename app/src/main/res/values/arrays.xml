@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipos_problema">
+        <item>Sinalização ou acessibilidades</item>
+        <item>Higiene urbana</item>
+        <item>Estradas e ciclovias</item>
+        <item>Segurança pública e ruido</item>
+        <item>Recursos naturais e espaços verdes</item>
+        <item>Saneamento</item>
+        <item>Outros</item>
+    </string-array>
+    <string-array name="opcoes_enviar_para">
+        <item>Câmara</item>
+        <item>Utilizadores</item>
+        <item>Todos</item>
+    </string-array>
+</resources>

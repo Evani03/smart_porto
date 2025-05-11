@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewReportProblema"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/card_background"
+    android:padding="16dp"
+    android:visibility="gone"
+    >
+
+    <!-- Título do Problema -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Título do problema"
+        android:textStyle="bold"
+        android:paddingBottom="4dp" />
+    <EditText
+        android:id="@+id/etTituloProblema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Introduz o título aqui"
+        android:inputType="textCapSentences" />
+
+    <!-- Tipo de Problema -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo de problema"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp" />
+    <Spinner
+        android:id="@+id/spinnerTipoProblema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/tipos_problema"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Destinatário -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviar para"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp" />
+    <Spinner
+        android:id="@+id/spinnerEnviarPara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/opcoes_enviar_para" />
+
+    <!-- Descrição -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp" />
+    <EditText
+        android:id="@+id/etDescricaoProblema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Detalha aqui o problema"
+        android:inputType="textMultiLine"
+        android:minLines="3" />
+
+    <!-- Botões -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/btnCancelarReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btnGuardarReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>

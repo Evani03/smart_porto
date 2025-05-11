@@ -23,6 +23,7 @@ class RegistarConta : ComponentActivity() {
         binding.createAccountButton.setOnClickListener{
             val intent = Intent(this,CriarConta::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.loginButton.setOnClickListener{
@@ -35,8 +36,9 @@ class RegistarConta : ComponentActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener{
                     if(it.isSuccessful)
                     {
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, Mapa::class.java)
                         startActivity(intent)
+                        finish()
                     }
                     else
                     {
@@ -59,8 +61,9 @@ class RegistarConta : ComponentActivity() {
         super.onStart()
         if(firebaseAuth.currentUser != null)
         {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, Mapa::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

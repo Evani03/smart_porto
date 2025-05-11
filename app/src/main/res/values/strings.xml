@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">projeto2_smart_city_final</string>
     <string name="confirmar_senha">Confirmar Senha</string>
+    <string name="find_me">Encontrar minha posição</string>
 </resources>

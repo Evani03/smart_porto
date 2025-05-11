@@ -35,6 +35,7 @@ class CriarConta : ComponentActivity() {
                         if (it.isSuccessful) {
                             val intent = Intent(this, RegistarConta::class.java)
                             startActivity(intent)
+                            finish()
                         } else {
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                         }
@@ -54,8 +55,9 @@ class CriarConta : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         if (firebaseAuth.currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, Mapa::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

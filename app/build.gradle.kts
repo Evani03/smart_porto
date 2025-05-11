@@ -5,8 +5,10 @@ plugins {
     id("com.google.gms.google-services")
     alias(libs.plugins.kotlin.compose)
     //alias(libs.plugins.google-services)
+    //id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 
 }
+val mapsKey: String = project.property("MAPS_API_KEY") as String
 
 android {
     namespace = "com.example.projeto2_smart_city_final"
@@ -24,6 +26,11 @@ android {
             useSupportLibrary = true
         }
 
+        buildConfigField("String", "MAPS_API_KEY", mapsKey)
+        manifestPlaceholders += mapOf(
+        "MAPS_API_KEY" to mapsKey
+        )
+
     }
 
     buildTypes {
@@ -36,6 +43,7 @@ android {
         }
         buildFeatures {
             viewBinding = true
+            buildConfig = true
         }
     }
     compileOptions {
@@ -69,6 +77,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,6 +88,11 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation (libs.play.services.maps.v1900)
+    implementation (libs.play.services.location)
+
+    implementation (libs.play.services.maps)
+    implementation("com.google.android.material:material:1.6.0")
 
 
 

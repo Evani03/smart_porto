@@ -90,6 +90,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation (libs.play.services.maps.v1900)
     implementation (libs.play.services.location)
+    implementation(libs.firebase.firestore.ktx)
 
     implementation (libs.play.services.maps)
     implementation("com.google.android.material:material:1.6.0")

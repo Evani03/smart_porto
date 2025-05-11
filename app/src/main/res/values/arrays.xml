@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipos_problema">
+        <item>Buraco</item>
+        <item>Iluminação</item>
+        <item>Sinalização</item>
+        <item>Ruído</item>
+        <item>Recursos naturais</item>
+    </string-array>
+    <string-array name="opcoes_enviar_para">
+        <item>Câmara</item>
+        <item>Utilizadores</item>
+        <item>Todos</item>
+    </string-array>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewReportProblema"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/card_background"
+    android:padding="16dp"
+    android:visibility="gone"
+    >
+
+    <EditText
+        android:id="@+id/etTituloProblema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título do problema"
+        android:inputType="textCapSentences" />
+
+    <Spinner
+        android:id="@+id/spinnerTipoProblema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/tipos_problema" />
+
+    <Spinner
+        android:id="@+id/spinnerEnviarPara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/opcoes_enviar_para" />
+
+    <EditText
+        android:id="@+id/etDescricaoProblema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:layout_marginTop="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnCancelarReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btnGuardarReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>

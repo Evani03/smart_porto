@@ -50,7 +50,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         val tipo: String = "",
         val enviarPara: String = "",
         val descricao: String = "",
-        val timestamp: Timestamp = Timestamp.now()
+        val timestamp: Timestamp = Timestamp.now(),
+        val problemResolvido: String = "nao"
     )
 
     companion object {
@@ -106,7 +107,10 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                     tipo = tipo, enviarPara = enviarPara, descricao = descricao)
                 Firebase.firestore.collection("issues").add(issue)
                     .addOnSuccessListener {
-                        if (enviarPara != "Câmara") addMarkerForIssue(issue)
+                        if (enviarPara != "Câmara") {
+                            addMarkerForIssue(issue)
+                            issues.add(issue)
+                        }
                         etTitulo.setText(""); spinnerTipo.setSelection(0)
                         spinnerEnviar.setSelection(0); etDescricao.setText("")
                         form.visibility = View.GONE
@@ -132,6 +136,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         // Carrega Firestore e adiciona marcadores iniciais
         Firebase.firestore.collection("issues").get().addOnSuccessListener { snaps ->
             snaps.documents.forEach { doc ->
+                if (doc.getString("problemResolvido") == "sim") return@forEach
                 val issue = Issue(
                     lat = doc.getDouble("lat") ?: return@forEach,
                     lng = doc.getDouble("lng") ?: return@forEach,
@@ -146,6 +151,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+        // clique na info window global
+        map.setOnInfoWindowClickListener { marker -> showResolveDialog(marker) }
         map.setInfoWindowAdapter(object : InfoWindowAdapter {
             override fun getInfoWindow(marker: Marker) = null
             override fun getInfoContents(marker: Marker): View {
@@ -159,6 +166,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+
+
         map.setOnMapClickListener { latLng ->
             if (reportingMode) {
                 reportingMode = false; reportLatLng = latLng
@@ -167,6 +176,30 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
+    private fun showResolveDialog(marker: Marker) {
+        AlertDialog.Builder(this)
+            .setTitle("Problema resolvido?")
+            .setMessage("Deseja marcar este problema como resolvido e removê-lo do mapa?")
+            .setPositiveButton("Sim") { _, _ ->
+                val issue = marker.tag as Issue
+                Firebase.firestore.collection("issues")
+                    .whereEqualTo("lat", issue.lat)
+                    .whereEqualTo("lng", issue.lng)
+                    .get()
+                    .addOnSuccessListener { snaps ->
+                        snaps.documents.firstOrNull()?.reference
+                            ?.update("problemResolvido", "sim")
+                            ?.addOnSuccessListener {
+                                issues.remove(issue)
+                                refreshMarkers() }
+                    }
+            }
+            .setNegativeButton("Não", null)
+            .show()
+    }
+
+
 
     private fun addMarkerForIssue(issue: Issue) {
         val map = googleMap ?: return
@@ -215,7 +248,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         val toShow = if (selectedTypes.isEmpty()) issues
         else issues.filter { it.tipo in selectedTypes }
         toShow
-            .filter { it.enviarPara != "Câmara" }
+            .filter { it.enviarPara != "Câmara" && it.problemResolvido == "nao"}
             .forEach { addMarkerForIssue(it) }
     }
 

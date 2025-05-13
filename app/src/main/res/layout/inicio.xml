@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Conteúdo rolável -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header com Imagem e Texto -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="106dp">
+
+                <ImageView
+                    android:id="@+id/ivHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="106dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/porto_ft_cidade" />
+
+                <TextView
+                    android:id="@+id/tvOverlayText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:text="Porto"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <!-- Bem-vindo -->
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/border_background"
+                android:text="Bem-vindo ao Porto"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <!-- Outros conteúdos, como títulos, RecyclerViews, etc. -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:text="Novidades"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_news" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:text="Serviços"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvServices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_service" />
+
+            <!-- Se desejar, outros conteúdos podem vir aqui -->
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Barra de menu fixa (Bottom Navigation) -->
+    <include
+        android:id="@+id/bottom_navigation_include"
+        layout="@layout/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

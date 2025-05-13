@@ -3,7 +3,5 @@
     <string name="confirmar_senha">Confirmar Senha</string>
     <string name="reportar_problema">Reportar problema</string>
     <string name="filtrar_problemas">Filtrar problemas</string>
-    <string name="confirm_resolved">Problema resolvido?</string>
-    <string name="sim">Sim</string>
-    <string name="nao">Não</string>
+    <string name="google_maps_key">AIzaSyAocQQbuk3IXVLchryj90EeVz2g7MUMmhM</string>
 </resources>

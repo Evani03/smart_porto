@@ -1,6 +1,7 @@
 package com.example.projeto2_smart_city_final
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -76,6 +78,19 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         // FAB “Filtrar tipos”
         binding.root.findViewById<FloatingActionButton>(R.id.btn_filter)
             .setOnClickListener { showFilterDialog() }
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, Inicio::class.java))
+                    finish()}
+                R.id.nav_mapa -> {}
+                //R.id.nav_social -> startActivity(Intent(this, SocialActivity::class.java))
+                //R.id.nav_conta -> startActivity(Intent(this, ContaActivity::class.java))
+            }
+            true
+        }
 
         setupForm()
     }

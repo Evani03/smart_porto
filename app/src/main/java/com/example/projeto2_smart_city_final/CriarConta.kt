@@ -6,8 +6,11 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.projeto2_smart_city_final.databinding.CriarContaBinding
 import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 
-class CriarConta : ComponentActivity() {
+
+class CriarConta : AppCompatActivity() {
 
     private lateinit var binding: CriarContaBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -55,11 +58,13 @@ class CriarConta : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         if (firebaseAuth.currentUser != null) {
-            val intent = Intent(this, Mapa::class.java)
+            val intent = Intent(this, Inicio::class.java)
             startActivity(intent)
             finish()
         }
     }
+
+
 }
 
 

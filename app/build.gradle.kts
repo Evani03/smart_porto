@@ -95,6 +95,9 @@ dependencies {
     implementation (libs.play.services.maps)
     implementation("com.google.android.material:material:1.6.0")
 
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
+
 
 
 }

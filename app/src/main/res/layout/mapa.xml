@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Mapa">
+    tools:context=".Mapa"
+    >
 
     <!-- Fragmento do mapa -->
     <fragment
@@ -30,17 +31,27 @@
         android:id="@+id/btn_reportar_problema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:contentDescription="@string/reportar_problema"
         android:src="@drawable/ic_report_problem"
-        map:backgroundTint="@color/white" />
+        map:backgroundTint="@color/white"
+        android:layout_above="@id/bottom_navigation_include"/>
 
 
     <include
         android:id="@+id/viewReportProblema"
         layout="@layout/report_problema"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
+
+    <include
+        android:id="@+id/bottom_navigation_include"
+        layout="@layout/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+
 </RelativeLayout>

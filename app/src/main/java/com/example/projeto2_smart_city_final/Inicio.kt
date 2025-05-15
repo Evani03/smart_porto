@@ -3,10 +3,13 @@ package com.example.projeto2_smart_city_final
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.projeto2_smart_city_final.adapter.ServiceDetailAdapter
 import com.example.projeto2_smart_city_final.databinding.InicioBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
@@ -14,12 +17,6 @@ import com.google.firebase.ktx.Firebase
 
 class Inicio : AppCompatActivity() {
 
-    data class ServiceDb(
-             val tipoServico: String = "",
-              val descricao: String = "",
-              val contacto: String = "",
-              val valor: Double = 0.0
-                  )
 
     private lateinit var binding: InicioBinding
     private var allServices: List<ServiceDb> = emptyList()
@@ -89,7 +86,7 @@ class Inicio : AppCompatActivity() {
 
                         // cria adapter que recebe uma lista de tipos e abre diálogo ao clicar
                         val servicoAdapter = ServicoAdapter(tipos) { tipoSelecionado ->
-                                          showServicesForType(tipoSelecionado.toString())
+                                          showServicesForType(tipoSelecionado)
                                       }
                                  binding.rvServices.layoutManager =
                                           LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -100,14 +97,27 @@ class Inicio : AppCompatActivity() {
     }
 
     private fun showServicesForType(tipo: String) {
+        // 1) Filtra a lista de todos os serviços
         val lista = allServices.filter { it.tipoServico == tipo }
-        val itens  = lista.map { "${it.descricao} (Contacto: ${it.contacto}, valor: ${it.valor})" }
+
+
+        // 2) Infla o layout do diálogo que tem a RecyclerView
+        val dialogView = layoutInflater.inflate(R.layout.dialog_service_list, null)
+
+        // 3) Liga o RecyclerView ao adapter
+        val rv = dialogView.findViewById<RecyclerView>(R.id.rvServiceDetails)
+        rv.layoutManager = LinearLayoutManager(this)
+        rv.adapter = ServiceDetailAdapter(lista)
+
+        // 4) Mostra o diálogo com o RecyclerView
         AlertDialog.Builder(this)
-            .setTitle("Serviços – $tipo")
-            .setItems(itens.toTypedArray(), null)
-            .setPositiveButton("OK", null)
+            .setTitle("Serviço – $tipo")
+            .setView(dialogView)
+            .setPositiveButton("Fechar", null)
             .show()
     }
+
+
 }
 
 

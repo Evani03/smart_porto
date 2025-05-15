@@ -4,4 +4,7 @@
     <string name="reportar_problema">Reportar problema</string>
     <string name="filtrar_problemas">Filtrar problemas</string>
     <string name="google_maps_key">AIzaSyAocQQbuk3IXVLchryj90EeVz2g7MUMmhM</string>
+    <string name="valor_0_00">Valor: €0.00</string>
+    <string name="contacto_telefone">Contacto: telefone</string>
+    <string name="descri_o_do_servi_o">Descrição do serviço</string>
 </resources>

@@ -14,6 +14,7 @@ import com.example.projeto2_smart_city_final.databinding.InicioBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class Inicio : AppCompatActivity() {
 
@@ -23,6 +24,7 @@ class Inicio : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.inicio)
+
         binding = InicioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -33,8 +35,10 @@ class Inicio : AppCompatActivity() {
                 R.id.nav_mapa ->  {
                     startActivity(Intent(this, Mapa::class.java))
                     finish()}
-                //R.id.nav_social -> startActivity(Intent(this, SocialActivity::class.java))
-                //R.id.nav_conta -> startActivity(Intent(this, ContaActivity::class.java))
+                //R.id.nav_social -> {startActivity(Intent(this, SocialActivity::class.java))
+                // finish}
+                R.id.nav_conta ->{ startActivity(Intent(this, ContaActivity::class.java))
+                finish()}
             }
             true
         }
@@ -110,7 +114,8 @@ class Inicio : AppCompatActivity() {
         rv.adapter = ServiceDetailAdapter(lista)
 
         // 4) Mostra o diálogo com o RecyclerView
-        AlertDialog.Builder(this)
+        //AlertDialog.Builder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle("Serviço – $tipo")
             .setView(dialogView)
             .setPositiveButton("Fechar", null)

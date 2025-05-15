@@ -14,15 +14,6 @@
 
         <!-- Título -->
 
-        <ImageButton
-            android:id="@+id/togglePasswordVisibility3"
-            android:layout_width="60dp"
-            android:layout_height="34dp"
-            android:layout_gravity="center_vertical"
-            android:background="@null"
-            android:contentDescription="Alternar visibilidade da senha"
-            android:src="@drawable/ic_eye" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

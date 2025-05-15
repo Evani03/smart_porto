@@ -8,6 +8,8 @@ import com.example.projeto2_smart_city_final.databinding.CriarContaBinding
 import com.google.firebase.auth.FirebaseAuth
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.ktx.firestore
 
 
 class CriarConta : AppCompatActivity() {
@@ -31,14 +33,37 @@ class CriarConta : AppCompatActivity() {
             val email = binding.emailInput.text.toString()
             val pass = binding.passwordInput.text.toString()
             val confirm_pass = binding.confirmPasswordInput.text.toString()
+            val username = binding.usernameInput.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty() && confirm_pass.isNotEmpty()) {
                 if (pass == confirm_pass) {
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            val intent = Intent(this, RegistarConta::class.java)
-                            startActivity(intent)
-                            finish()
+                            // 1) Obter o UID
+                                        val uid = firebaseAuth.currentUser!!.uid
+                                        // 2) Montar o objeto para a coleção 'users'
+                                        val userProfile = mapOf(
+                                                "nomeUtilizador" to username,     // ou podes usar uid ou uma string vazia
+                                                "email"         to email,
+                                                "tipoConta"     to "cidadao"
+                                                    )
+                                       // 3) Gravar em Firestore
+                                        Firebase.firestore
+                                            .collection("users")
+                                            .document(uid)
+                                            .set(userProfile)
+                                            .addOnSuccessListener {
+                                                    // Só depois daqueles dados escritos é que prosseguimos
+                                                    val intent = Intent(this, RegistarConta::class.java)
+                                                   startActivity(intent)
+                                                    finish()
+                                                }
+                                             .addOnFailureListener { e ->
+                                                    Toast.makeText(this,
+                                                            "Conta criada mas falhou gravar perfil: ${e.message}",
+                                                            Toast.LENGTH_LONG
+                                                                ).show()
+                                                }
                         } else {
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                         }

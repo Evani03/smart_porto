@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvServiceTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="Tipo"/>
+
+        <TextView
+            android:id="@+id/tvServiceDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:text="Descrição"/>
+
+        <TextView
+            android:id="@+id/tvServiceContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:text="Contacto"/>
+
+        <TextView
+            android:id="@+id/tvServiceValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:text="Valor"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

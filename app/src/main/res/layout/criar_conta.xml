@@ -48,6 +48,17 @@
             android:padding="12dp"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Campo de Email -->
+        <EditText
+            android:id="@+id/usernameInput"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Nome de utilizador"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/custom_edittext"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
         <!-- Campo de Senha -->
         <LinearLayout
             android:layout_width="match_parent"

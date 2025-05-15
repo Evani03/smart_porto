@@ -14,4 +14,16 @@
         <item>Utilizadores</item>
         <item>Todos</item>
     </string-array>
+    <string-array name="tipos_servico">
+        <item>Artes verdes</item>
+        <item>Canalização</item>
+        <item>Eletricidade</item>
+        <item>Eletrodomésticos</item>
+        <item>Assistência rodoviária</item>
+        <item>Climatização</item>
+        <item>Informática e redes</item>
+        <item>Serralharia e reparos</item>
+        <item>Limpeza</item>
+    </string-array>
+
 </resources>

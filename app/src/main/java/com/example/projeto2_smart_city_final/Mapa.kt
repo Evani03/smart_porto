@@ -1,6 +1,7 @@
 package com.example.projeto2_smart_city_final
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.DateFormat
@@ -53,7 +55,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         val enviarPara: String = "",
         val descricao: String = "",
         val timestamp: Timestamp = Timestamp.now(),
-        val problemResolvido: String = "nao"
+        val problemResolvido: String = "nao",
+        val userId: String = ""
     )
 
     companion object {
@@ -66,6 +69,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         binding = MapaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.selectedItemId = R.id.nav_mapa  // ou o respectivo ID da Activity
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.id_map) as SupportMapFragment
@@ -79,15 +84,16 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         binding.root.findViewById<FloatingActionButton>(R.id.btn_filter)
             .setOnClickListener { showFilterDialog() }
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNav.setOnItemSelectedListener { item ->
+
+        bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
                     startActivity(Intent(this, Inicio::class.java))
                     finish()}
                 R.id.nav_mapa -> {}
                 //R.id.nav_social -> startActivity(Intent(this, SocialActivity::class.java))
-                //R.id.nav_conta -> startActivity(Intent(this, ContaActivity::class.java))
+                R.id.nav_conta -> {startActivity(Intent(this, ContaActivity::class.java))
+                finish()}
             }
             true
         }
@@ -118,8 +124,15 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
             val descricao = etDescricao.text.toString().trim()
             val latLng = reportLatLng
             if (titulo.isNotEmpty() && descricao.isNotEmpty() && latLng != null) {
-                val issue = Issue(lat = latLng.latitude, lng = latLng.longitude, titulo = titulo,
-                    tipo = tipo, enviarPara = enviarPara, descricao = descricao)
+                val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                val issue = Issue(
+                    lat = latLng.latitude,
+                    lng = latLng.longitude,
+                    titulo = titulo,
+                    tipo = tipo,
+                    enviarPara = enviarPara,
+                    descricao = descricao,
+                    userId = uid)
                 Firebase.firestore.collection("issues").add(issue)
                     .addOnSuccessListener {
                         if (enviarPara != "Câmara") {

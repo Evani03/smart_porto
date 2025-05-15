@@ -1,0 +1,17 @@
+<resources>
+    <!-- já existente -->
+    <style name="Theme.Projeto" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- … -->
+    </style>
+
+    <!-- 1. estilo custom para cards -->
+    <style name="CardOutlined" parent="Widget.MaterialComponents.CardView">
+        <!-- sem elevação -->
+        <item name="cardElevation">0dp</item>
+        <!-- canto arredondado -->
+        <item name="cardCornerRadius">8dp</item>
+        <!-- borda de 1dp com cor secundária -->
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">?attr/colorOnSurface</item>
+    </style>
+</resources>

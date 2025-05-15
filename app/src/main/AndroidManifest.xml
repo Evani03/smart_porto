@@ -43,6 +43,18 @@
             android:exported="false"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 
+        <activity android:name=".ContaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Projeto2_smart_city_final"/>
+
+        <activity android:name=".IssueListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Projeto2_smart_city_final"/>
+
+        <activity android:name=".ServiceListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Projeto2_smart_city_final"/>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

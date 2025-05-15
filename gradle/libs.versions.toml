@@ -21,6 +21,7 @@ playServicesMapsVersion = "19.2.0"
 playServicesMeasurement = "22.4.0"
 playServicesMeasurementImpl = "22.4.0"
 appcompat = "1.7.0"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -51,6 +52,7 @@ play-services-maps-v1900 = { module = "com.google.android.gms:play-services-maps
 play-services-measurement = { module = "com.google.android.gms:play-services-measurement", version.ref = "playServicesMeasurement" }
 play-services-measurement-impl = { module = "com.google.android.gms:play-services-measurement-impl", version.ref = "playServicesMeasurementImpl" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

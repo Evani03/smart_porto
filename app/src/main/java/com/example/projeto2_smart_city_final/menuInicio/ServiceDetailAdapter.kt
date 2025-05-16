@@ -1,4 +1,4 @@
-package com.example.projeto2_smart_city_final.adapter
+package com.example.projeto2_smart_city_final.menuInicio
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-//import com.example.projeto2_smart_city_final.Inicio
+//import com.example.projeto2_smart_city_final.MenuInicio.Inicio
 import com.example.projeto2_smart_city_final.R
-import com.example.projeto2_smart_city_final.ServiceDb
 
 class ServiceDetailAdapter(
     private val items: List<ServiceDb>

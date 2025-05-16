@@ -18,7 +18,7 @@
         android:theme="@style/Theme.Projeto2_smart_city_final"
         tools:targetApi="31">
 
-        <activity android:name=".CriarConta"
+        <activity android:name=".criarRegistarConta.CriarConta"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegistarConta"
+        <activity android:name=".criarRegistarConta.RegistarConta"
             android:exported="false"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 
-        <activity android:name=".Mapa"
+        <activity android:name=".menuMapa.Mapa"
             android:exported="false"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 
@@ -39,19 +39,19 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 
-        <activity android:name=".Inicio"
+        <activity android:name=".menuInicio.Inicio"
             android:exported="false"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 
-        <activity android:name=".ContaActivity"
+        <activity android:name=".menuConta.ContaActivity"
             android:exported="false"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 
-        <activity android:name=".IssueListActivity"
+        <activity android:name=".menuConta.IssueListActivity"
             android:exported="false"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 
-        <activity android:name=".ServiceListActivity"
+        <activity android:name=".menuConta.ServiceListActivity"
             android:exported="false"
             android:theme="@style/Theme.Projeto2_smart_city_final"/>
 

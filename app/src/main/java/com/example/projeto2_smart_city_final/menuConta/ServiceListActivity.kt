@@ -1,4 +1,4 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.menuConta
 
 import android.os.Bundle
 import android.widget.EditText
@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.projeto2_smart_city_final.R
 import com.example.projeto2_smart_city_final.databinding.ActivityServiceListBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

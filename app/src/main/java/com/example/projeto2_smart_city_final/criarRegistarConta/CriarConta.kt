@@ -1,13 +1,12 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.criarRegistarConta
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import com.example.projeto2_smart_city_final.databinding.CriarContaBinding
 import com.google.firebase.auth.FirebaseAuth
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import com.example.projeto2_smart_city_final.menuInicio.Inicio
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.ktx.firestore
 

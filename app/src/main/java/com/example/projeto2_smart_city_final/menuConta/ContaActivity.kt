@@ -1,4 +1,4 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.menuConta
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.projeto2_smart_city_final.menuMapa.Mapa
+import com.example.projeto2_smart_city_final.R
+import com.example.projeto2_smart_city_final.criarRegistarConta.RegistarConta
+import com.example.projeto2_smart_city_final.menuInicio.Inicio
 import com.example.projeto2_smart_city_final.databinding.ActivityContaBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -90,14 +94,14 @@ class ContaActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottom_navigation)
             .setOnItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.nav_home   ->{
+                    R.id.nav_home ->{
                         startActivity(Intent(this, Inicio::class.java))
                         finish()}
-                    R.id.nav_mapa   -> {
+                    R.id.nav_mapa -> {
                         startActivity(Intent(this, Mapa::class.java))
                         finish()}
                     R.id.nav_social -> {}/*startActivity(Intent(this, SocialActivity::class.java)) */
-                    R.id.nav_conta  -> { }
+                    R.id.nav_conta -> { }
                 }
                 //finish()
                 true

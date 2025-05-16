@@ -1,4 +1,4 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.menuInicio
 
 data class ServiceDb(
     val id: String = "",

@@ -1,11 +1,10 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.criarRegistarConta
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
-import com.example.projeto2_smart_city_final.MainActivity
+import com.example.projeto2_smart_city_final.menuInicio.Inicio
 import com.example.projeto2_smart_city_final.databinding.RegistarContaBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -22,7 +21,7 @@ class RegistarConta : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         binding.createAccountButton.setOnClickListener{
-            val intent = Intent(this,CriarConta::class.java)
+            val intent = Intent(this, CriarConta::class.java)
             startActivity(intent)
             finish()
         }

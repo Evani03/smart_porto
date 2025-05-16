@@ -1,15 +1,16 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.menuInicio
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.projeto2_smart_city_final.adapter.ServiceDetailAdapter
+import com.example.projeto2_smart_city_final.menuConta.ContaActivity
+import com.example.projeto2_smart_city_final.criarRegistarConta.RegistarConta
+import com.example.projeto2_smart_city_final.menuMapa.Mapa
+import com.example.projeto2_smart_city_final.R
 import com.example.projeto2_smart_city_final.databinding.InicioBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore

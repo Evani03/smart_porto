@@ -1,8 +1,7 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.menuConta
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projeto2_smart_city_final.databinding.ActivityIssueListBinding
 import com.google.firebase.auth.FirebaseAuth

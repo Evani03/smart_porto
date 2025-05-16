@@ -1,4 +1,4 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.menuInicio
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto2_smart_city_final.R
-import com.example.projeto2_smart_city_final.Noticia
 
 data class Noticia(
     val titulo: String,

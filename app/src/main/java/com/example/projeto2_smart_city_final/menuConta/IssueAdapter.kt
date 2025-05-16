@@ -1,4 +1,4 @@
-package com.example.projeto2_smart_city_final
+package com.example.projeto2_smart_city_final.menuConta
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projeto2_smart_city_final.R
 
 class IssueAdapter(private val items: List<IssueItem>) :
     RecyclerView.Adapter<IssueAdapter.VH>() {

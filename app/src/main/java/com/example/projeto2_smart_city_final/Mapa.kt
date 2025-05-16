@@ -43,6 +43,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
     private var googleMap: GoogleMap? = null
     private var reportLatLng: LatLng? = null
     private var reportingMode = false
+    private var filterMyProblems = false
 
     private val issues = mutableListOf<Issue>()
     private val selectedTypes = mutableSetOf<String>()
@@ -172,7 +173,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                     tipo = doc.getString("tipo") ?: "",
                     enviarPara = doc.getString("enviarPara") ?: "",
                     descricao = doc.getString("descricao") ?: "",
-                    timestamp = doc.getTimestamp("timestamp") ?: Timestamp.now()
+                    timestamp = doc.getTimestamp("timestamp") ?: Timestamp.now(),
+                    userId    = doc.getString("userId") ?: ""
                 )
                 issues.add(issue)
                 if (issue.enviarPara != "Câmara") addMarkerForIssue(issue)
@@ -260,21 +262,46 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
 
     private fun showFilterDialog() {
         val tipos = resources.getStringArray(R.array.tipos_problema)
-        val checked = BooleanArray(tipos.size) { tipos[it] in selectedTypes }
-        AlertDialog.Builder(this)
-            .setTitle("Filtrar tipos de problema")
-            .setMultiChoiceItems(tipos, checked) { _, which, isChecked ->
-                if (isChecked) selectedTypes.add(tipos[which]) else selectedTypes.remove(tipos[which])
+        // cria uma opção extra no fim:
+        val allOptions = tipos + arrayOf("Os meus problemas")
+        val checked = BooleanArray(allOptions.size) { index ->
+            if (index < tipos.size) {
+                allOptions[index] in selectedTypes
+            } else {
+                filterMyProblems
             }
-            .setPositiveButton("Aplicar") { _, _ -> refreshMarkers() }
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Filtrar problemas")
+            .setMultiChoiceItems(allOptions, checked) { _, which, isChecked ->
+                if (which < tipos.size) {
+                    // continua a filtrar por tipos
+                    if (isChecked) selectedTypes.add(tipos[which])
+                    else selectedTypes.remove(tipos[which])
+                } else {
+                    // última opção é "Os meus problemas"
+                    filterMyProblems = isChecked
+                }
+            }
+            .setPositiveButton("Aplicar") { _, _ ->
+                refreshMarkers()
+            }
             .setNegativeButton("Cancelar", null)
             .show()
     }
 
+
     private fun refreshMarkers() {
         googleMap?.clear()
-        val toShow = if (selectedTypes.isEmpty()) issues
+        var toShow = if (selectedTypes.isEmpty()) issues
         else issues.filter { it.tipo in selectedTypes }
+
+        // 2) filtra por "meus problemas" se estiver marcado
+        if (filterMyProblems) {
+            val uid = FirebaseAuth.getInstance().currentUser?.uid
+            toShow = toShow.filter { it.userId == uid }
+        }
         toShow
             .filter { it.enviarPara != "Câmara" && it.problemResolvido == "nao"}
             .forEach { addMarkerForIssue(it) }

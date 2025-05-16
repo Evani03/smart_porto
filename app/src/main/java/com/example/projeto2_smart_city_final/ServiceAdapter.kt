@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ServiceAdapter(private val items: List<ServiceItem>) :
+class ServiceAdapter(
+    private val items: List<ServiceItem>,
+    private val onClick: (ServiceItem) -> Unit) :
     RecyclerView.Adapter<ServiceAdapter.VH>() {
 
     inner class VH(view: View) : RecyclerView.ViewHolder(view) {
@@ -20,6 +22,7 @@ class ServiceAdapter(private val items: List<ServiceItem>) :
             tvDesc   .text = item.descricao
             tvContact.text = "Contacto: ${item.contacto}"
             tvValue  .text = "Valor: €%.2f".format(item.valor)
+            itemView.setOnClickListener { onClick(item) }
         }
     }
 

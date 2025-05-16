@@ -14,6 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 data class ServiceItem(
+    val id: String = "",
     val tipoServico: String = "",
     val descricao: String = "",
     val contacto: String = "",
@@ -47,13 +48,16 @@ class ServiceListActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { snaps ->
                 val list = snaps.documents.mapNotNull { doc ->
+                    val id = doc.id
                     val t  = doc.getString("tipo_servico") ?: ""
                     val d  = doc.getString("descricao")    ?: ""
                     val c  = doc.getString("contacto")     ?: ""
                     val v  = doc.getDouble("valor")        ?: 0.0
-                    ServiceItem(t, d, c, v)
+                    ServiceItem(id,t, d, c, v)
                 }
-                binding.rvServices.adapter = ServiceAdapter(list)
+                // passamos um lambda que recebe o ServiceItem clicado
+                binding.rvServices.adapter = ServiceAdapter(list) { service ->
+                       showDeleteServiceDialog(service) }
                 binding.swipeRefresh.isRefreshing = false
             }
             .addOnFailureListener {
@@ -108,6 +112,28 @@ class ServiceListActivity : AppCompatActivity() {
                 }
                 .setNegativeButton("Cancelar", null)
                 .show()
+        }
+
+    private fun showDeleteServiceDialog(service: ServiceItem) {
+          AlertDialog.Builder(this)
+            .setTitle("Apagar serviço?")
+            .setMessage("Deseja realmente apagar “${service.descricao}”?")
+            .setPositiveButton("Sim") { _, _ ->
+                  binding.swipeRefresh.isRefreshing = true
+                  db.collection("servico")
+                    .document(service.id)                      // ← usamos o documentId
+                    .delete()
+                    .addOnSuccessListener {
+                          Toast.makeText(this, "Serviço apagado", Toast.LENGTH_SHORT).show()
+                          loadServices()                           // refresca a lista
+                        }
+                    .addOnFailureListener { e ->
+                          Toast.makeText(this, "Erro: ${e.message}", Toast.LENGTH_SHORT).show()
+                          binding.swipeRefresh.isRefreshing = false
+                        }
+                }
+            .setNegativeButton("Não", null)
+            .show()
         }
 
     }

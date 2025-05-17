@@ -3,6 +3,7 @@ package com.example.projeto2_smart_city_final.menuInicio
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,10 +13,12 @@ import com.example.projeto2_smart_city_final.criarRegistarConta.RegistarConta
 import com.example.projeto2_smart_city_final.menuMapa.Mapa
 import com.example.projeto2_smart_city_final.R
 import com.example.projeto2_smart_city_final.databinding.InicioBinding
+import com.example.projeto2_smart_city_final.menuSocial.SocialActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.Query
 
 class Inicio : AppCompatActivity() {
 
@@ -36,8 +39,8 @@ class Inicio : AppCompatActivity() {
                 R.id.nav_mapa ->  {
                     startActivity(Intent(this, Mapa::class.java))
                     finish()}
-                //R.id.nav_social -> {startActivity(Intent(this, SocialActivity::class.java))
-                // finish}
+                R.id.nav_social -> {startActivity(Intent(this, SocialActivity::class.java))
+                    finish()}
                 R.id.nav_conta ->{ startActivity(Intent(this, ContaActivity::class.java))
                 finish()}
             }
@@ -53,23 +56,42 @@ class Inicio : AppCompatActivity() {
         // Bem-vindo
         binding.welcomeText.text = "Bem-vindo ao Porto"
 
-        // Botão definições
-        val noticias = listOf(
-            Noticia("Título 1", "Descrição da notícia 1"),
-            Noticia("Título 2", "Descrição da notícia 2"),
-            Noticia("Título 3", "Descrição da notícia 3"),
-            Noticia("Título 4", "Descrição da notícia 4")
-        )
-
-        val noticiaAdapter = NoticiaAdapter(noticias) { noticia ->
-            val intent = Intent(this, RegistarConta::class.java)
-            intent.putExtra("titulo", noticia.titulo)
-            intent.putExtra("descricao", noticia.descricao)
+        // 1) Primeiro, a lista e o adapter
+        val newsList = mutableListOf<Noticia>()
+        val newsAdapter = NoticiaAdapter(newsList) { noticia ->
+            val intent = Intent(this, SocialActivity::class.java)
+            intent.putExtra("open_news_id", noticia.id)
             startActivity(intent)
         }
+        binding.rvNews.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvNews.adapter = newsAdapter
 
-        binding.rvNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvNews.adapter = noticiaAdapter
+// 2) Busca as 4 notícias mais recentes
+        Firebase.firestore
+            .collection("news")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .limit(4)
+            .get()
+            .addOnSuccessListener { snaps ->
+                newsList.clear()
+                snaps.documents.forEach { doc ->
+                    newsList.add(
+                        Noticia(
+                            id       = doc.id,
+                            titulo   = doc.getString("title") ?: "",
+                            lead     = doc.getString("lead")  ?: "",
+                            imageUrl = doc.getString("imageUrl")
+                        )
+                    )
+                }
+                newsAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Erro a carregar notícias: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+
 
         // Botão para ver todas as notícias
 

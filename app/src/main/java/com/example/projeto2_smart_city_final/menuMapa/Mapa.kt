@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -17,6 +18,7 @@ import com.example.projeto2_smart_city_final.R
 import com.example.projeto2_smart_city_final.menuInicio.Inicio
 import com.example.projeto2_smart_city_final.databinding.MapaBinding
 import com.example.projeto2_smart_city_final.menuConta.ContaActivity
+import com.example.projeto2_smart_city_final.menuSocial.SocialActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -33,6 +35,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.DateFormat
@@ -59,7 +62,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         val descricao: String = "",
         val timestamp: Timestamp = Timestamp.now(),
         val problemResolvido: String = "nao",
-        val userId: String = ""
+        val userId: String = "",
+        val authorName: String = ""
     )
 
     companion object {
@@ -94,7 +98,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                     startActivity(Intent(this, Inicio::class.java))
                     finish()}
                 R.id.nav_mapa -> {}
-                //R.id.nav_social -> startActivity(Intent(this, SocialActivity::class.java))
+                R.id.nav_social -> {startActivity(Intent(this, SocialActivity::class.java))
+                finish()}
                 R.id.nav_conta -> {startActivity(Intent(this, ContaActivity::class.java))
                 finish()}
             }
@@ -168,7 +173,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         Firebase.firestore.collection("issues").get().addOnSuccessListener { snaps ->
             snaps.documents.forEach { doc ->
                 if (doc.getString("problemResolvido") == "sim") return@forEach
-                val issue = Issue(
+                val uid = doc.getString("userId") ?: ""
+                val baseIssue = Issue(
                     lat = doc.getDouble("lat") ?: return@forEach,
                     lng = doc.getDouble("lng") ?: return@forEach,
                     titulo = doc.getString("titulo") ?: "",
@@ -178,8 +184,19 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                     timestamp = doc.getTimestamp("timestamp") ?: Timestamp.now(),
                     userId    = doc.getString("userId") ?: ""
                 )
-                issues.add(issue)
-                if (issue.enviarPara != "Câmara") addMarkerForIssue(issue)
+                FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener { userSnap ->
+                        val nome = userSnap.getString("nomeUtilizador").takeIf { !it.isNullOrBlank() }
+                            ?: "Anónimo"
+                        // aqui criamos o Issue completo
+                        val issue = baseIssue.copy(authorName = nome)
+                        issues.add(issue)
+                        if (issue.enviarPara != "Câmara") addMarkerForIssue(issue)
+
+                    }
             }
         }
 
@@ -189,11 +206,15 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
             override fun getInfoWindow(marker: Marker) = null
             override fun getInfoContents(marker: Marker): View {
                 val view = layoutInflater.inflate(R.layout.custom_info_window, null)
+                val issue = marker.tag as Issue
+
                 view.findViewById<TextView>(R.id.tvInfoTitle).text = marker.title
-                view.findViewById<TextView>(R.id.tvInfoDescricao).text = (marker.tag as Issue).descricao
-                val ts = (marker.tag as Issue).timestamp.toDate().time
+                view.findViewById<TextView>(R.id.tvInfoDescricao).text = issue.descricao
+                val ts = issue.timestamp.toDate().time
                 view.findViewById<TextView>(R.id.tvInfoTimestamp).text =
                     DateFormat.getDateTimeInstance().format(Date(ts))
+                view.findViewById<TextView>(R.id.tvInfoAuthor).text = "Por: ${issue.authorName}"
+
                 return view
             }
         })

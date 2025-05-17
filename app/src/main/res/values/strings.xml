@@ -7,4 +7,5 @@
     <string name="valor_0_00">Valor: €0.00</string>
     <string name="contacto_telefone">Contacto: telefone</string>
     <string name="descri_o_do_servi_o">Descrição do serviço</string>
+    <string name="por">Por: …</string>
 </resources>

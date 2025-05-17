@@ -22,6 +22,7 @@ playServicesMeasurement = "22.4.0"
 playServicesMeasurementImpl = "22.4.0"
 appcompat = "1.7.0"
 swiperefreshlayout = "1.1.0"
+firebaseStorageKtx = "21.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +54,7 @@ play-services-measurement = { module = "com.google.android.gms:play-services-mea
 play-services-measurement-impl = { module = "com.google.android.gms:play-services-measurement-impl", version.ref = "playServicesMeasurementImpl" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

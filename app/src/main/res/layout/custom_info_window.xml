@@ -13,6 +13,7 @@
         android:textColor="@color/black"/>
 
 
+
     <TextView
         android:id="@+id/tvInfoDescricao"
         android:layout_width="wrap_content"
@@ -27,4 +28,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textColor="@color/gray"/>
+
+    <TextView
+        android:id="@+id/tvInfoAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        android:text="@string/por"/>
 </LinearLayout>
